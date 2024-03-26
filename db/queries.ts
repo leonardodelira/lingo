@@ -19,16 +19,16 @@ export const getUserProgress = cache(async () => {
     const data = await db.query.userProgress.findFirst({
         where: eq(userProgress.userId, userId),
         with: {
-            activeCourse: true
-        }
+            activeCourse: true,
+        },
     });
 
-    return data
-})
+    return data;
+});
 
 export const getCourseById = cache(async (courseId: number) => {
     const data = await db.query.courses.findFirst({
-        where: eq(courses.id, courseId)
+        where: eq(courses.id, courseId),
     });
 
     return data;
