@@ -68,7 +68,7 @@ export const challengesRelations = relations(challenges, ({ one, many }) => ({
     challengesProgress: many(challengesProgress),
 }));
 
-export const challengesOptions = pgTable("challengesOptions", {
+export const challengesOptions = pgTable("challenges_options", {
     id: serial("id").primaryKey(),
     challengeId: integer("challenge_id")
         .references(() => challenges.id, { onDelete: "cascade" })
@@ -86,7 +86,7 @@ export const challengesOptionsRelations = relations(challengesOptions, ({ one })
     }),
 }));
 
-export const challengesProgress = pgTable("challengesProgress", {
+export const challengesProgress = pgTable("challenges_progress", {
     id: serial("id").primaryKey(),
     userId: text("user_id").notNull(),
     challengeId: integer("challenge_id")
