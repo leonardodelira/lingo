@@ -17,15 +17,13 @@ const LessonPage = async () => {
         .length / lesson.challenges.length * 100;
 
     return (
-        <div>
-            <Quizz
-                initialPercentage={initialPercentage}
-                initialHearts={userProgress.hearts}
-                initialLessonId={lesson.id}
-                initialLessonChallenges={lesson.challenges}
-                userSubscription={false}
-            />
-        </div>
+        <Quizz
+            initialPercentage={initialPercentage}
+            initialHearts={userProgress.hearts}
+            initialLessonId={lesson.id}
+            initialLessonChallenges={lesson.challenges}
+            userSubscription={false}
+        />
     )
 }
 
