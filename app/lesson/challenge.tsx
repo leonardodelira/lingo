@@ -4,7 +4,7 @@ import { Card } from "./card";
 
 type Props = {
     options: typeof challengesOptions.$inferSelect[];
-    onSelect: () => void;
+    onSelect: (id: number) => void;
     status: "correct" | "wrong" | "none";
     selectedOption?: number;
     disabled?: boolean;
@@ -33,8 +33,8 @@ export const Challenge = ({
                     audioSrc={option.audioSrc}
                     text={option.text}
                     shortcut={`${i + 1}`}
-                    selected={selectedOption === i}
-                    onClick={onSelect}
+                    selected={selectedOption === option.id}
+                    onClick={() => onSelect(option.id)}
                     disabled={disabled}
                     status={status}
                     type={type}
