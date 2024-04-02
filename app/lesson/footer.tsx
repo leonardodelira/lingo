@@ -5,7 +5,7 @@ import { useKey, useMedia } from "react-use";
 
 type Props = {
     disabled?: boolean;
-    lessonId?: boolean;
+    lessonId?: number;
     status: string;
     onCheck: () => void;
 }
