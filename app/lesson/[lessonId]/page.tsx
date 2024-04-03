@@ -1,6 +1,6 @@
 import { getLesson, getUserProgress } from "@/db/queries";
 import { redirect } from "next/navigation";
-import { Quizz } from "./quizz";
+import { Quizz } from "../quizz";
 
 type Props = {
     params: {
