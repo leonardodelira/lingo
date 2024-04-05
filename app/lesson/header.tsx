@@ -4,29 +4,22 @@ import { InfinityIcon, X } from "lucide-react";
 import Image from "next/image";
 
 type Props = {
-    hearts: number;
-    percentage: number;
-    hasActiveSubscription: boolean;
-}
+  hearts: number;
+  percentage: number;
+  hasActiveSubscription: boolean;
+};
 
-export const Header = ({
-    hearts,
-    percentage,
-    hasActiveSubscription
-}: Props) => {
-    const { open } = useExitModal();
+export const Header = ({ hearts, percentage, hasActiveSubscription }: Props) => {
+  const { open } = useExitModal();
 
-    return (
-        <header className="lg:pt-[50px] pt-[20px]  px-10 flex gap-x-7 items-center justify-between max-w-[1440px] mx-auto w-full">
-            <X
-                onClick={open}
-                className="text-slate-500 hover:opacty-75 transition cursor-pointer"
-            />
-            <Progress value={percentage} />
-            <div className="text-rose-500 flex items-center font-bold">
-                <Image src="/heart.svg" width={28} height={28} alt="heart" className="mr-2" />
-                {hasActiveSubscription ? <InfinityIcon className="h-6 w-6 stroke-[3]" /> : hearts}
-            </div>
-        </header>
-    );
-}
+  return (
+    <header className="mx-auto flex  w-full max-w-[1440px] items-center justify-between gap-x-7 px-10 pt-[20px] lg:pt-[50px]">
+      <X onClick={open} className="hover:opacty-75 cursor-pointer text-slate-500 transition" />
+      <Progress value={percentage} />
+      <div className="flex items-center font-bold text-rose-500">
+        <Image src="/heart.svg" width={28} height={28} alt="heart" className="mr-2" />
+        {hasActiveSubscription ? <InfinityIcon className="h-6 w-6 shrink-0 stroke-[3]" /> : hearts}
+      </div>
+    </header>
+  );
+};
