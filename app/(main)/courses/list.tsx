@@ -8,9 +8,9 @@ import { upsertUserProgress } from "@/actions/user-progress";
 import { toast } from "sonner";
 
 type Props = {
-    courses: typeof courses.$inferSelect[],
+    courses: (typeof courses.$inferSelect)[];
     activeCourseId?: typeof userProgress.$inferSelect.activeCourseId;
-}
+};
 
 export const List = ({ courses, activeCourseId }: Props) => {
     const router = useRouter();
@@ -24,15 +24,16 @@ export const List = ({ courses, activeCourseId }: Props) => {
         }
 
         startTransaction(() => {
-            upsertUserProgress(id)
-                .catch(() => toast.error("Something went wront"));
+            upsertUserProgress(id).catch(() => toast.error("Something went wront"));
         });
-    }
+    };
 
     return (
-        <div className="pt-6 grid grid-cols-2 
-            lg:grid-cols-[repeat(auto-fill,minmax(210px,1fr))] gap-4">
-            {courses.map(course => (
+        <div
+            className="grid grid-cols-2 gap-4 
+            pt-6 lg:grid-cols-[repeat(auto-fill,minmax(210px,1fr))]"
+        >
+            {courses.map((course) => (
                 <Card
                     id={course.id}
                     key={course.id}
@@ -40,8 +41,9 @@ export const List = ({ courses, activeCourseId }: Props) => {
                     imageSrc={course.imageSrc}
                     active={course.id === activeCourseId}
                     disable={pending}
-                    onClick={onClick} />
+                    onClick={onClick}
+                />
             ))}
         </div>
-    )
+    );
 };

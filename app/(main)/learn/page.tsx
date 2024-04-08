@@ -10,7 +10,7 @@ import { Quests } from "@/components/quests";
 
 const LearnPage = async () => {
     const userProgressPromisse = getUserProgress();
-    const userSubscriptionPromisse = await getUserSubscription();
+    const userSubscriptionPromisse = getUserSubscription();
     const courseProgressPromisse = getCourseProgress();
     const lessonPercentagePromisse = getLessonPercentage();
     const unitsPromisse = getUnits();

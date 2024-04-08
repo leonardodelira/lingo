@@ -20,6 +20,7 @@ const main = async () => {
             db.delete(schema.lessons),
             db.delete(schema.courses),
             db.delete(schema.challengesOptions),
+            db.delete(schema.challengesProgress),
             db.delete(schema.userSubscription),
         ]);
 

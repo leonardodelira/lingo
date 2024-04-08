@@ -1,13 +1,14 @@
 "use server";
 
-import { POINTS_TO_REFILL } from "@/constants";
-import db from "@/db/drizzle";
-import { getCourseById, getUserProgress, getUserSubscription } from "@/db/queries";
-import { challenges, challengesProgress, userProgress } from "@/db/schema";
-import { auth, currentUser } from "@clerk/nextjs";
 import { and, eq } from "drizzle-orm";
-import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
+import { auth, currentUser } from "@clerk/nextjs";
+
+import db from "@/db/drizzle";
+import { POINTS_TO_REFILL } from "@/constants";
+import { getCourseById, getUserProgress, getUserSubscription } from "@/db/queries";
+import { challengesProgress, challenges, userProgress } from "@/db/schema";
 
 export const upsertUserProgress = async (courseId: number) => {
     const { userId } = await auth();
@@ -27,13 +28,13 @@ export const upsertUserProgress = async (courseId: number) => {
         throw new Error("Course is empty");
     }
 
-    const existingCourseProgress = await getUserProgress();
+    const existingUserProgress = await getUserProgress();
 
-    if (existingCourseProgress) {
+    if (existingUserProgress) {
         await db.update(userProgress).set({
             activeCourseId: courseId,
-            userName: user.username || "User",
-            userImageSrc: user.imageUrl || "./mascot.svg",
+            userName: user.firstName || "User",
+            userImageSrc: user.imageUrl || "/mascot.svg",
         });
 
         revalidatePath("/courses");
@@ -42,10 +43,10 @@ export const upsertUserProgress = async (courseId: number) => {
     }
 
     await db.insert(userProgress).values({
-        userId: userId,
+        userId,
         activeCourseId: courseId,
-        userName: user.username || "User",
-        userImageSrc: user.imageUrl || "./mascot.svg",
+        userName: user.firstName || "User",
+        userImageSrc: user.imageUrl || "/mascot.svg",
     });
 
     revalidatePath("/courses");
